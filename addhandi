@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+texlua addhandi.lua "$1" "$2"
+cp handiscn.htm ~/server-zaloha/web-new/src/
+cp handiscn_b.htm ~/server-zaloha/web-new/src/
+scp index.html beta:/var/www/html/handi/index.html
