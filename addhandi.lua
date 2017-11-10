@@ -7,9 +7,6 @@ local citace = arg[1]
 local soubor = arg[2]
 
 
-if not citace or not soubor then
-	os.exit(1,"Použití: addhandi citace soubor")
-end
 
 local function load_tpl(file)
   local f = io.open("tpl/"..file, "r")
@@ -84,20 +81,26 @@ local function save_with_template(filename, template, vars)
 end
 
 local records, newno = load_tsv "publikace.tsv"
-table.insert(records, citace)
-save_file("publikace.tsv",save_records(records))
 
-newno = newno + 1
-print("Building dir ".. newno)
-lfs.mkdir(newno)
-os.execute("cp ".. soubor .." ".. newno)
+-- neuploadovat soubory, pokud nepřidáváme soubor
+-- jenom aktualizujeme soubory se seznamem citací.
+-- užitečné pokud změníme šablony.
+if citace and soubor and citace~="" and soubor~="" then
+  table.insert(records, citace)
+  save_file("publikace.tsv",save_records(records))
 
-local indexpar = {citace = citace, zip = soubor}
-local index_tpl = load_tpl("index.html")
-local index = lustache:render(index_tpl, indexpar)
+  newno = newno + 1
+  print("Building dir ".. newno)
+  lfs.mkdir(newno)
+  os.execute("cp ".. soubor .." ".. newno)
 
-save_file(newno.."/index.html",index) 
-os.execute("scp -r ".. newno.." beta:/var/www/html/handi/ ")
+  local indexpar = {citace = citace, zip = soubor}
+  local index_tpl = load_tpl("index.html")
+  local index = lustache:render(index_tpl, indexpar)
+
+  save_file(newno.."/index.html",index) 
+  os.execute("scp -r ".. newno.." beta:/var/www/html/handi/ ")
+end
 
 local abece, nasl, handindex = make_tables(records)
 
