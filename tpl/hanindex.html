@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<HTML>
+
+<head>
+<meta charset="utf-8">
+<meta name="Author" content="Michal Hoftich">
+<title>Seznam digitalizovanych knih</title>
+<style type="text/css">
+body{
+}
+</style>
+</head>
+
+<body >
+
+<h1>Seznam digitalizovaných knih</h1>
+
+
+
+<ul>
+  {{#records}}
+<li type="disc">
+<a href="./{{number}}/index.html">{{nazev}}</a>
+</li>
+<br>
+{{/records}}
+</ul>
+
+
+
+</body>
+
+</html>
