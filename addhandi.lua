@@ -99,7 +99,7 @@ if citace and soubor and citace~="" and soubor~="" then
   local index = lustache:render(index_tpl, indexpar)
 
   save_file(newno.."/index.html",index) 
-  os.execute("scp -r ".. newno.." knihovna-new:/home/hoftich/nginx/handi/ ")
+  os.execute("scp -r ".. newno.." knihovna-new:/home/hoftich/nginx/html/handi/")
 end
 
 local abece, nasl, handindex = make_tables(records)
