@@ -99,6 +99,7 @@ if citace and soubor and citace~="" and soubor~="" then
   local index = lustache:render(index_tpl, indexpar)
 
   save_file(newno.."/index.html",index) 
+  os.execute("cp -r " .. newno .. "../pedf-web-navrh/backup/handi/")
   os.execute("scp -r ".. newno.." knihovna-new:/home/hoftich/nginx/html/handi/")
 end
 

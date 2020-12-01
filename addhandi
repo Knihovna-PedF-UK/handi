@@ -3,3 +3,5 @@ texlua addhandi.lua "$1" "$2"
 cp handiscn.htm ~/knihovna/web/navrh/html/
 cp handiscn_b.htm ~/knihovna/web/navrh/html/
 scp index.html knihovna-new:/home/hoftich/nginx/handi/index.html
+cp index.html ../pedf-web-navrh/backup/handi/
+
